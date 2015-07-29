@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Walls : MonoBehaviour {
-	void CreateWall(int px, int pz, float sx, float sz) {
+	void CreateWall (int px, int pz, float sx, float sz) {
 		GameObject wall = GameObject.CreatePrimitive (PrimitiveType.Cube);
 		wall.transform.localPosition = new Vector3 (px, 0, pz);
 		wall.transform.localScale = new Vector3 (sx, 2.0f, sz);

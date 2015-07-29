@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using Game;
 
 public class PlayerController : MonoBehaviour {
 	public float speed;
@@ -10,16 +11,14 @@ public class PlayerController : MonoBehaviour {
 	private Rigidbody rb;
 	private int count;
 
-	void Start ()
-	{
+	void Start () {
 		rb = GetComponent<Rigidbody> ();
 		count = 0;
 		SetCountText ();
 		winText.text = "";
 	}
 
-	void FixedUpdate ()
-	{
+	void FixedUpdate () {
 		float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
 
@@ -28,9 +27,8 @@ public class PlayerController : MonoBehaviour {
 		rb.AddForce (movement * speed);
 	}
 
-	void OnTriggerEnter (Collider other)
-	{
-		if (other.gameObject.CompareTag ("Pick Up"))
+	void OnTriggerEnter (Collider other) {
+		if (other.gameObject.CompareTag (Game.Config.pickUpTag))
 		{
 			other.gameObject.SetActive (false);
 			count = count + 1;
@@ -38,10 +36,9 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	void SetCountText ()
-	{
+	void SetCountText () {
 		countText.text = "Count: " + count.ToString ();
-		if (count >= 12)
+		if (count >= Game.Config.numberOfObjects)
 		{
 			winText.text = "You Win!";
 		}
