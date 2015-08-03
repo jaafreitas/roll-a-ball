@@ -8,11 +8,11 @@ public class Scene : MonoBehaviour {
 	private Vector3 mainCameraOffset;
 
 	void Start () {
+		Camera ();
 		Ground ();
 		Walls ();
 		PickUps ();
 		Player ();
-		Camera ();
 	}
 	
 	void LateUpdate () {
@@ -41,6 +41,7 @@ public class Scene : MonoBehaviour {
 		player.name = "Player";
 		player.tag = Game.Tag.Player;
 		player.AddComponent<Player> ();
+		mainCameraOffset = mainCamera.transform.position - player.transform.position;
 	}
 
 	void Camera () {
@@ -49,6 +50,5 @@ public class Scene : MonoBehaviour {
 		mainCamera.transform.localPosition = new Vector3 (0, 10, -10);
 		mainCamera.transform.localEulerAngles = new Vector3 (45, 0, 0);
 		mainCamera.AddComponent<Camera> ();
-		mainCameraOffset = mainCamera.transform.position - player.transform.position;
 	}
 }
